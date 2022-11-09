@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<head>
+<title>
+Games
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1> My Games</h1>
+
+	<table class="table table-striped">
+		<tr>
+			
+			<th>TITLE</th>
+			<th>HOURS PLAYED</th>
+			<th>YEAR OF RELEASE</th>
+			<th>PERSONAL SCORE</th>
+			<th>GENRE</th>
+		</tr>
+		<tr th:each= "games: ${game}">
+
+			<td th:text="${games.title}"></td>
+			<td th:text="${games.hoursPlayed}"></td>
+			<td th:text="${games.releaseYear}"></td>
+			<td th:text="${games.personalScore}"></td>
+			<td th:text="${games.genre.name}"></td>
+			<td><a th:href="@{/edit/{id}(id=${games.id})}" class="btn btn-success" >Edit</a></td>
+			<td><a th:href="@{/delete{id}(id=${games.id})}" class="btn btn-danger" >Delete</a></td>
+			
+			</tr>
+		
+			
+	</table>
+
+<a  class="btn btn-success" href="/add">Add games</a>
+<br>
+<a  href="/homepage">Back</a>
+
+
+</body>
+</html>

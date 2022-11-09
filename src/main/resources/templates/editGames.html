@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>
+Editing Page
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1 >edit games</h1>
+
+<div>
+		
+		<form th:object="${games}" th:action="@{../save}" action="#" method="post">
+			<label for="id">id</label>
+			<input type="hidden" id="id" th:field="*{id}" readonly="readonly"/>
+		  	<label for="tt">title</label>
+			<input type="text" id="tt" th:field="*{title}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="hPlayed">hours played</label>
+			<input type="text" id="hPlayed" th:field="*{hoursPlayed}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="rYear">release year</label>
+			<input type="text" id="rYear" th:field="*{releaseYear}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="pScore">personal score</label>
+			<input type="text" id="pScore" th:field="*{personalScore}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="genlist">Genre</label>
+			<select id="genlist" th:field="*{genre}" class="form-control">
+			<option th:each="genre: ${genres} " th:value="${genre.genreid}" th:text="${genre.name}"></option>
+			</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<input type="submit" value="save"></input>
+		</form>
+	</div>
+
+
+
+</body>
+</html>
