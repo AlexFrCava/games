@@ -8,16 +8,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Genre {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long genreid;
-
+	@NotEmpty
 	private String name;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "genre")
+	@JsonIgnoreProperties("genre")
 	private List<Games> games;
 
 	public Genre() {

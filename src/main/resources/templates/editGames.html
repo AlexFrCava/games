@@ -12,25 +12,35 @@ Editing Page
 <div>
 		
 		<form th:object="${games}" th:action="@{../save}" action="#" method="post">
-			<label for="id">id</label>
 			<input type="hidden" id="id" th:field="*{id}" readonly="readonly"/>
+			
 		  	<label for="tt">title</label>
 			<input type="text" id="tt" th:field="*{title}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
+			
 		  	<label for="hPlayed">hours played</label>
-			<input type="text" id="hPlayed" th:field="*{hoursPlayed}" />
+			<input type="number" min="0" id="hPlayed" th:field="*{hoursPlayed}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
+			
 		  	<label for="rYear">release year</label>
-			<input type="text" id="rYear" th:field="*{releaseYear}" />
+			<input type="number" min="1972"  max="2022" id="rYear" th:field="*{releaseYear}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
+			
 			<label for="pScore">personal score</label>
-			<input type="text" id="pScore" th:field="*{personalScore}" />
+			<input type="number" min="1"  max="10" id="pScore" th:field="*{personalScore}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 			
 			<div style="clear: both; display: block; height: 10px;"></div>
+			
 			<label for="genlist">Genre</label>
 			<select id="genlist" th:field="*{genre}" class="form-control">
 			<option th:each="genre: ${genres} " th:value="${genre.genreid}" th:text="${genre.name}"></option>
+			</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="statlist">Status</label>
+			<select id="statlist" th:field="*{status}" class="form-control">
+			<option th:each="status: ${statusses} " th:value="${status.statusid}" th:text="${status.statusQuo}"></option>
 			</select>
 			<div style="clear: both; display: block; height: 10px;"></div>
 			

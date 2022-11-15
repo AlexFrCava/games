@@ -8,8 +8,20 @@ Games
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1> My Games</h1>
-
+<div class="container">
+	<div class="col-md-4">
+		<h1> My Games</h1>
+	</div>
+	<div class="col-md-4">
+		<h2 th:inline="text">[[${#httpServletRequest.remoteUser}]]</h2>
+	</div>
+	<div class="col-md-4" style="padding:20px 0">
+		<form  th:action= "@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+	
+	
 	<table class="table table-striped">
 		<tr>
 			
@@ -18,6 +30,8 @@ Games
 			<th>YEAR OF RELEASE</th>
 			<th>PERSONAL SCORE</th>
 			<th>GENRE</th>
+			<th>STATUS</th>
+			<th sec:authorize ="hasAuthority('ADMIN')"> </th>
 		</tr>
 		<tr th:each= "games: ${game}">
 
@@ -26,18 +40,17 @@ Games
 			<td th:text="${games.releaseYear}"></td>
 			<td th:text="${games.personalScore}"></td>
 			<td th:text="${games.genre.name}"></td>
-			<td><a th:href="@{/edit/{id}(id=${games.id})}" class="btn btn-success" >Edit</a></td>
-			<td><a th:href="@{/delete{id}(id=${games.id})}" class="btn btn-danger" >Delete</a></td>
+			<td th:text="${games.status.statusQuo}"></td>
+			<td><a th:href="@{/edit/{id}(id=${games.id})}" class="btn btn-success">Edit</a></td>
+			<td sec:authorize ="hasAuthority('ADMIN')"><a th:href="@{/delete{id}(id=${games.id})}" class="btn btn-danger" >Delete</a></td>
 			
 			</tr>
+		</table>
+		<div>
+		<a  class="btn btn-success" href="/add">Add game</a> <a  class="btn btn-success" href="/addGenre">Add genre</a>
+		</div>
 		
-			
-	</table>
 
-<a  class="btn btn-success" href="/add">Add games</a>
-<br>
-<a  href="/homepage">Back</a>
-
-
+</div>
 </body>
 </html>

@@ -6,31 +6,42 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Games {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	@NotEmpty
 	private String title;
 	private int hoursPlayed;
 	private int releaseYear;
 	private int personalScore;
 
 	@ManyToOne
+	@JsonIgnoreProperties("game")
 	@JoinColumn(name = "genreid")
 	private Genre genre;
+
+	@ManyToOne
+	@JsonIgnoreProperties("game")
+	@JoinColumn(name = "statusid")
+	private Status status;
 
 	public Games() {
 	}
 
-	public Games(String title, int hoursPlayed, int releaseYear, int personalScore, Genre genre) {
+	public Games(String title, int hoursPlayed, int releaseYear, int personalScore, Genre genre, Status status) {
 		super();
 		this.title = title;
 		this.hoursPlayed = hoursPlayed;
 		this.releaseYear = releaseYear;
 		this.personalScore = personalScore;
 		this.genre = genre;
+		this.status = status;
 
 	}
 
@@ -40,6 +51,14 @@ public class Games {
 
 	public void setGenre(Genre genre) {
 		this.genre = genre;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public long getId() {
