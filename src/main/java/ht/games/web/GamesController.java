@@ -77,7 +77,6 @@ public class GamesController {
 	}
 
 	@RequestMapping(value = "/delete{id}", method = RequestMethod.GET)
-	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteGames(@PathVariable("id") Long gamesId, Model model) {
 		gamesRepository.deleteById(gamesId);
 		return "redirect:gamelist";
@@ -93,6 +92,7 @@ public class GamesController {
 	}
 
 	@RequestMapping(value = "/addGenre")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String addGenre(Model model) {
 		model.addAttribute("genre", new Genre());
 		return "addGenre";
