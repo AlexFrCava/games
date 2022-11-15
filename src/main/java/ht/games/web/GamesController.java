@@ -98,12 +98,6 @@ public class GamesController {
 		return "addGenre";
 	}
 
-	// @RequestMapping(value = "/save", method = RequestMethod.POST)
-	// public String save(Games games) {
-	// gamesRepository.save(games);
-	// return "redirect:gamelist";
-	// }
-
 	@PostMapping("/save")
 	public String saveGame(@Valid Games games, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
@@ -116,11 +110,6 @@ public class GamesController {
 		return "redirect:gamelist";
 	}
 
-	// @RequestMapping(value = "/save2", method = RequestMethod.POST)
-	// public String save2(Genre genre) {
-	// genreRepository.save(genre);
-	// return "redirect:gamelist";
-	// }
 	@PostMapping("/save2")
 	public String saveGenre(@Valid Genre genre, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {

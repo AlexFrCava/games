@@ -20,9 +20,9 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/css/**", "/homepage", "/api/gameses", "/api", "/signup").permitAll()
-				.anyRequest().authenticated().and().formLogin().defaultSuccessUrl("/gamelist", true).permitAll().and()
-				.logout().logoutSuccessUrl("/homepage").invalidateHttpSession(true).deleteCookies("JSESSIONID").and()
+		http.authorizeRequests().antMatchers("/css/**", "/homepage", "/api", "/signup").permitAll().anyRequest()
+				.authenticated().and().formLogin().defaultSuccessUrl("/gamelist", true).permitAll().and().logout()
+				.logoutSuccessUrl("/homepage").invalidateHttpSession(true).deleteCookies("JSESSIONID").and()
 				.exceptionHandling().accessDeniedPage("/unauthorized");
 		return http.build();
 	}
